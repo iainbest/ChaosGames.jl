@@ -16,4 +16,8 @@ Includes basic plot recipe, to be expanded on.
   - rules for chaos game (how to choose next vertex, next point to plot,...)
   - simple plotting (and animations?)
   - driving code (probably remain in src/ChaosGame.jl)
+  - install/clone instructions for readme
 - and more probably
+
+## See also:
+Wiki: https://en.wikipedia.org/wiki/Chaos_game
