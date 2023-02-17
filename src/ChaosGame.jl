@@ -8,7 +8,7 @@ export ChaosGame
 Returns points from a chaos game. 
 
 # Arguments
-- `shape::Int64`: number of sides of regular polygons
+- `shape`: if Int, number of sides of regular polygon. Else must be vector of (ordered?) coordinates
 - `N::Int64`: number of iterations in game
 - `movefactor::Float64=0.5`: scaling distance to move towards next vertex. 
 - `restriction::Symbol`: restriction for chaos game. TODO: more detail here
@@ -18,9 +18,7 @@ Returns points from a chaos game.
 Returns (x,y) values for chosen shape, and the (x,y) points from the specified chaos game, as four separate arrays.
 
 """
-function ChaosGame(shape::Int,N::Int,movefactor=0.5,
-    restriction::Symbol=:NoRestriction,initialpoint=[1.0,1.0],
-    centre=[1.0,1.0])
+function ChaosGame(shape,N::Int,movefactor=0.5,restriction::Symbol=:NoRestriction,initialpoint=[1.0,1.0],centre=[1.0,1.0])
 
     ### get vertices of shape (and x,y coords)
     vertices = GetVertices(shape,centre)
@@ -58,6 +56,43 @@ function ChaosGame(shape::Int,N::Int,movefactor=0.5,
     return x,y,pointsx,pointsy
 
 end
+
+
+"""
+    MultipleShapeChaosGame()
+
+WIP
+"""
+function MultipleShapeChaosGame()
+
+    ### define multiple shapes & vertices
+    
+    ### save history of chosen vertices
+
+    ### save points for plotting
+
+    ### choose initial point and initial shape
+
+    for (count,i) in enumerate(1:N)
+        ### choose next vertex from one shape
+
+        ### get next point
+
+        ### update vertex history
+
+        ### random chance to swap to next shape? 
+            ### if swap do we clear vertex history? 
+
+    end
+
+    pointsx = [i[1] for i in points]
+    pointsy = [i[2] for i in points]
+
+    ### return vector of x- and y- coords of vertices for each shape
+    return x_list,y_list,pointsx,pointsy
+end
+
+
 
 ### TODO: either incorporate or delete this
 # ### barnsley fern 

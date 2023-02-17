@@ -1,7 +1,8 @@
-export GetVertices, GetVerticesXY
+export GetVertices, GetVerticesXY, GetVerticesRegularPolygon
+export GetVerticesMultipleShapes
 
 """
-    GetVertices(shape,centre)
+    GetVerticesRegularPolygon(shape::Int64)
 
 Returns list of (coordinates of) vertices of a regular polygon.
 
@@ -11,7 +12,7 @@ Returns list of (coordinates of) vertices of a regular polygon.
 
 inspired from luxor.jl ngon
 """
-function GetVertices(shape::Int,centre)
+function GetVerticesRegularPolygon(shape::Int64,centre)
     if shape < 3 
         throw(ShapeException)
     end
@@ -24,7 +25,27 @@ function GetVertices(shape::Int,centre)
     return [ [x+cos(orientation + (n * 2pi/shape)), 
               y+sin(orientation + (n * 2pi/shape))] 
               for n in 1:shape ]
+end
 
+"""
+    GetVertices(shape,centre)
+
+Returns list of (coordinates of) vertices of a regular polygon.
+
+# Arguments
+- `shape`: number of sides of regular polygons
+- `centre::Vector{Float64}`: position of centre of shape
+
+inspired from luxor.jl ngon
+"""
+function GetVertices(shape,centre)
+    if typeof(shape) == :Int64
+        return GetVerticesRegularPolygon(shape,centre)
+    elseif typeof(shape) == Vector{Vector{Float64}}
+        return shape
+    else
+        throw(RestrictionException)
+    end
 end
 
 """
@@ -36,4 +57,14 @@ function GetVerticesXY(vertices)
     ### TODO: cleaner way to do this unpacking? probably
     x,y = [i[1] for i in vertices],[i[2] for i in vertices]
     return x,y
+end
+
+"""
+    GetVerticesMultipleShapes()
+
+WIP
+"""
+function GetVerticesMultipleShapes(shapes::Vector{Union{Int64,Vector{Vector{Float64}}}},centres::Vector{Vector{Float64}})
+    
+    return 
 end
