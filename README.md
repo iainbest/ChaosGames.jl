@@ -25,7 +25,7 @@ julia> p1 = CGscatter(x,y,pointsx,pointsy)
 if you want to explore different options, or for simple sierpinski construction (or as a first try!) do: 
 
 ```
-$ julia sierpinksi_run.jl
+$ julia ./example/sierpinksi.jl
 ```
 
 ![sierpinksi](./images/sierpinski.png)
