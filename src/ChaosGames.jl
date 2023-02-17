@@ -3,7 +3,7 @@ module ChaosGames
 using Random
 using Plots
 
-gr(fmt=:png,size=(800,800))
+default(fmt=:png,size=(800,800))
 
 # Write your package code here.
 include("ChaosGame.jl")

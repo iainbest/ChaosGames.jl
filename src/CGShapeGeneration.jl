@@ -39,8 +39,8 @@ Returns list of (coordinates of) vertices of a regular polygon.
 inspired from luxor.jl ngon
 """
 function GetVertices(shape,centre)
-    if typeof(shape) == :Int64
-        return GetVerticesRegularPolygon(shape,centre)
+    if typeof(shape) == Int64
+        GetVerticesRegularPolygon(shape,centre)
     elseif typeof(shape) == Vector{Vector{Float64}}
         return shape
     else

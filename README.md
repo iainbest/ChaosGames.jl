@@ -6,6 +6,30 @@ Includes restriction rules to change the games.
 
 Includes basic plot recipe, to be expanded on.
 
+## Installation
+Git instructions
+
+## Usage example
+Inside cloned repository, activate environment. Then:
+
+```julia
+julia> include("src/ChaosGames.jl")
+
+julia> using .ChaosGames
+
+julia> x,y,pointsx,pointsy = ChaosGame(3,100000,0.5,...)
+
+julia> p1 = CGscatter(x,y,pointsx,pointsy)
+```
+
+if you want to explore different options, or for simple sierpinski construction (or as a first try!) do: 
+
+```
+$ julia sierpinksi_run.jl
+```
+
+![sierpinksi](./images/sierpinski.png)
+
 ## To Do:
 - clean up restriction code: naming, saving of unnecessary history of previous chosen vertices, ...
 - option of generic (non-regular) polygon for the game

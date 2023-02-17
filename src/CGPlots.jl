@@ -14,7 +14,7 @@ function CGscatter(x,y,pointsx,pointsy)
 
     plt=plot(vcat(x,x[1]),vcat(y,y[1]),label="")
 
-    scatter!(plt,pointsx,pointsy,label="",colour=:black,ms=1)
+    scatter!(plt,pointsx,pointsy,label="",colour=:black,ms=1,xticks=false,yticks=false,xaxis=false,yaxis=false)
 
     return plt
 end
