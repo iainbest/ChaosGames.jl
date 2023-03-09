@@ -30,13 +30,16 @@ end
 """
     GetVertices(shape,centre)
 
-Returns list of (coordinates of) vertices of a regular polygon.
+Returns list of (coordinates of) vertices of chosen shape.
+
+If shape is integer-valued, returns regular polygon with shape-many sides.
+If shape is already vector of vertices, simply re-return that vector.
 
 # Arguments
-- `shape`: number of sides of regular polygons
-- `centre::Vector{Float64}`: position of centre of shape
+- `shape`: either integer or vector of vertices
+- `centre::Vector{Float64}`: position of centre of shape (for regular polygons)
 
-inspired from luxor.jl ngon
+regular polygon portion heavily inspired by luxor.jl ngon
 """
 function GetVertices(shape,centre)
     if typeof(shape) == Int64
@@ -58,6 +61,23 @@ function GetVerticesXY(vertices)
     x,y = [i[1] for i in vertices],[i[2] for i in vertices]
     return x,y
 end
+
+################################################################
+### Arbitrary shapes defined by list of coordinates:
+C = [[0.0,0],[3,0],[3,1],[1,1],[1,4],[3,4],[3,5],[0,5]]
+H = [[0.0,0],[1,0],[1,2],[2,2],[2,0],[3,0],[3,5],[2,5],
+        [2,3],[1,3],[1,5],[0,5]]
+# A = 
+# O = 
+# S = 
+# G = 
+# M = 
+# E = 
+# dot = 
+# J = 
+# L = 
+
+################################################################
 
 """
     GetVerticesMultipleShapes()
