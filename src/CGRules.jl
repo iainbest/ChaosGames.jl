@@ -18,6 +18,9 @@ Chooses next vertex to move towards in a chaos game.
 - `restriction::Symbol`: restriction for chaos game. TODO: more detail here
 - `vertexhistory::Vector{Int64}`: history of chosen vertex indices. Used in some restrictions.
 - `currentiteration`::Int64: current iteration through game. Used to get correct parts of vertexhistory.
+
+Essentially works by randomly choosing index from vector of possible vertices, defined by specific chosen rule. 
+
 """
 function ChooseVertex(vertices::Vector{Vector{Float64}},restriction::Symbol,vertexhistory::Vector{Int64},currentiteration::Int64)
 
@@ -103,6 +106,42 @@ function ChooseVertex(vertices::Vector{Vector{Float64}},restriction::Symbol,vert
             ### defaults to random/no restriction
             chosenvertex,chosenindex = ChooseVertex(vertices,:NoRestriction,vertexhistory,currentiteration)
         end
+
+    elseif restriction == :WithinOneNeighbour
+        previousindex = vertexhistory[currentiteration+1]
+
+        possiblevertices = collect(1:length(vertices))
+
+        ### append first and last indices so we never get bounds errors
+        possiblevertices = vcat(vcat(possiblevertices[end:end],possiblevertices),possiblevertices[1:1])
+
+        upper = possiblevertices[previousindex+2]
+        prev = possiblevertices[previousindex+1]
+        lower = possiblevertices[previousindex]
+
+        ### filter out so only previous vertex, or first neighbours are included
+        filter!(v->v∈[upper,prev,lower],possiblevertices)
+
+        chosenindex = rand(possiblevertices)
+        chosenvertex = vertices[chosenindex]
+
+    elseif restriction == :WithinTwoNeighbours
+        previousindex = vertexhistory[currentiteration+1]
+
+        possiblevertices = collect(1:length(vertices))
+
+        ### append first pair and last pair of indices so we never get bounds errors
+        possiblevertices = vcat(vcat(possiblevertices[end-1:end],possiblevertices),possiblevertices[1:2])
+
+        upper = possiblevertices[previousindex+4]
+        prev = possiblevertices[previousindex+2]
+        lower = possiblevertices[previousindex]
+
+        ### filter out so only previous vertex, or first neighbours are included
+        filter!(v->v∈[upper,prev,lower],possiblevertices)
+
+        chosenindex = rand(possiblevertices)
+        chosenvertex = vertices[chosenindex]
 
     else
         throw(RestrictionException)
