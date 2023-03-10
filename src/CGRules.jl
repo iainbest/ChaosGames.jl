@@ -133,6 +133,8 @@ function ChooseVertex(vertices::Vector{Vector{Float64}},restriction::Symbol,vert
         ### append first pair and last pair of indices so we never get bounds errors
         possiblevertices = vcat(vcat(possiblevertices[end-1:end],possiblevertices),possiblevertices[1:2])
 
+        ### TODO: fix needed. This selects ONLY second neighbours, need first neighbours as well!
+
         upper = possiblevertices[previousindex+4]
         prev = possiblevertices[previousindex+2]
         lower = possiblevertices[previousindex]
