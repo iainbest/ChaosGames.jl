@@ -3,7 +3,7 @@ using Pkg; Pkg.activate(".")
 include("../src/ChaosGames.jl")
 
 using .ChaosGames
-using GR
+using Plots
 
 # C = [[0.0,0],[3,0],[3,1],[1,1],[1,4],[3,4],[3,5],[0,5]]
 C = [[0.0,1],[1,0],[3,0],[3,1],[2,1],[1,2],[1,3],[2,4],[3,4],[3,5],[1,5],[0,4]]
@@ -12,14 +12,25 @@ H = [[0.0,0],[1,0],[1,2],[2,2],[2,0],[3,0],[3,5],[2,5],[2,3],[1,3],[1,5],[0,5]]
 
 A = [[0.0,0],[1,0],[1,2],[2,2],[2,0],[3,0],[3,4],[2,5],[1,5],[0,4]]
 
-x,y,pointsx,pointsy = ChaosGame(C,50000,0.5,:WithinOneNeighbour)
-# x,y,pointsx,pointsy = ChaosGame(C,50000,0.5,:WithinTwoNeighbours)
+O = [[0.0,1],[1,0],[2,0],[3,1],[3,4],[2,5],[1,5],[0,4]]
 
-# x,y,pointsx,pointsy = ChaosGame(H,50000,0.5,:WithinOneNeighbour)
-# x,y,pointsx,pointsy = ChaosGame(H,50000,0.5,:WithinTwoNeighbours)
+S = [[0.0,0],[3,0],[3,3],[1,3],[1,4],[3,4],[3,5],[0,5],[0,2],[2,2],[2,1],[0,1]]
 
-# x,y,pointsx,pointsy = ChaosGame(A,50000,0.5,:WithinOneNeighbour)
-# x,y,pointsx,pointsy = ChaosGame(A,50000,0.5,:WithinTwoNeighbours)
+G = [[0.0,0],[4,0],[4,3],[2,3],[2,2],[3,2],[3,1],[1,1],[1,4],[4,4],[4,5],[0,5]]
+
+M = [[0.0,0],[1,0],[1,3],[1.5,1],[2.5,1],[3,3],[3,0],[4,0],[4,5],[3,5],[2.5,3],[1.5,3],[1,5],[0,5]]
+
+E = [[0.0,0],[3,0],[3,1],[1,1],[1,2],[2,2],[2,3],[1,3],[1,4],[3,4],[3,5],[0,5]]
 
 
-p1=CGscatter(x,y,pointsx,pointsy)
+
+letters = [C,H,A,O,S,G,A,M,E,S]
+names = ["C","H","A","O","S","G","A","M","E","S"]
+restriction = :WithinOneNeighbour
+# restriction = :WithinTwoNeighbours
+
+for l in eachindex(letters)
+    x,y,pointsx,pointsy = ChaosGame(letters[l],100000,0.5,restriction)
+    p1=CGscatter(x,y,pointsx,pointsy)
+    savefig(p1,".\\images\\letters\\$(string(restriction))\\$(names[l]).png")
+end
