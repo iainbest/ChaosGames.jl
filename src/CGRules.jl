@@ -136,11 +136,12 @@ function ChooseVertex(vertices::Vector{Vector{Float64}},restriction::Symbol,vert
         ### TODO: fix needed. This selects ONLY second neighbours, need first neighbours as well!
 
         upper = possiblevertices[previousindex+4]
-        prev = possiblevertices[previousindex+2]
         lower = possiblevertices[previousindex]
 
-        ### filter out so only previous vertex, or first neighbours are included
-        filter!(v->v∈[upper,prev,lower],possiblevertices)
+        possiblevertices = possiblevertices[previousindex:previousindex+4]
+
+        # ### filter out so only previous vertex, or first neighbours are included
+        # filter!(v->v∈collect(minimum([lower,upper]):maximum([lower,upper])),possiblevertices)
 
         chosenindex = rand(possiblevertices)
         chosenvertex = vertices[chosenindex]
